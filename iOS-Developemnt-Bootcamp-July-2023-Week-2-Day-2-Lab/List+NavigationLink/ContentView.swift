@@ -14,6 +14,13 @@ struct FoodData: Identifiable{
     var category : String
     var time : String
     var cat_image: String
+    var type: CategoryType
+}
+
+enum CategoryType {
+    case food
+    case market
+    case packages
 }
 
 
@@ -22,9 +29,9 @@ struct ContentView: View {
     @State var searchTxt : String = ""
     
     var data: [FoodData] = [
-        FoodData(category: "Food", time: "25 min", cat_image: "food"),
-        FoodData(category: "Maket", time: "20 min", cat_image: "SuperMarket"),
-        FoodData(category: "Package", time: "15 min", cat_image: "package")]
+        FoodData(category: "Food", time: "25 min", cat_image: "food", type: .food),
+        FoodData(category: "Market", time: "20 min", cat_image: "SuperMarket", type: .market),
+        FoodData(category: "Package", time: "15 min", cat_image: "package", type: .packages)]
     
     var body: some View {
         NavigationStack{
@@ -60,7 +67,7 @@ struct ContentView: View {
                     
                     HStack(spacing: 15){
                         ForEach(data) { item in
-                            CustomView(category: item.category, time: item.time, img: item.cat_image)
+                            CustomView(category: item.category, time: item.time, img: item.cat_image, categoryType: item.type)
                         }
                     }
                     .padding(.bottom)
